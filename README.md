@@ -59,8 +59,5 @@ Since we are going to be manually adding elements to the `ArrayList`, we'll have
 #### Test Your App
 Make sure the images you add are added to the ui and that you can select them to go into the details view
 
-### Part 2 - Another App
-Chose another app which we have built or one you build on your own and implement a `RecyclerView` in it.
-
 #### Challenge
-In your testing, find bugs and small feature improvements that can improve the polish of your app.
+Chose another app which we have built or one you build on your own and implement a `RecyclerView` in it.
