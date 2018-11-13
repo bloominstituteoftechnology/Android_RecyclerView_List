@@ -5,15 +5,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.thadocizn.imageviewer.R;
+import com.thadocizn.imageviewer.classes.ImageAdapter;
 import com.thadocizn.imageviewer.classes.ImageData;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String IMAGE_ID = "imageId";
     private ArrayList<ImageData> imageArray;
     private LinearLayout linearLayout;
+    private RecyclerView recyclerView;
+    private ImageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        linearLayout = findViewById(R.id.lnrLtImages);
-
         imageArray = new ArrayList<>();
+        recyclerView = findViewById(R.id.recycleViewer);
+        adapter = new ImageAdapter(imageArray);
+
 
         findViewById(R.id.btnAddImage).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,34 +72,16 @@ public class MainActivity extends AppCompatActivity {
 
                     imageArray.add(newImageData);
                     int imageIndex = imageArray.size() - 1;
-                    linearLayout.addView(getTextView(imageArray.get(imageIndex).getUri().toString(), imageIndex));
+
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(layoutManager);
+                    DividerItemDecoration itemDecor = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+                    recyclerView.addItemDecoration(itemDecor);
+                    recyclerView.setAdapter(adapter);
 
                 }
             }
         }
-    }
-
-    private TextView getTextView(final String name, final int index) {
-        final TextView textView = new TextView(this);
-
-        String[] parts = name.split("%");
-        final String part = parts[1];
-
-        textView.setText(part);
-        textView.setTextSize(24);
-        textView.setPadding(10, 10, 10, 10);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
-                intent.putExtra(IMAGE_ID, index);
-                intent.putExtra(IMAGE_URL, name);
-                intent.putExtra(IMAGE_NAME, part);
-                startActivity(intent);
-            }
-        });
-
-        return textView;
     }
 
     @Override
