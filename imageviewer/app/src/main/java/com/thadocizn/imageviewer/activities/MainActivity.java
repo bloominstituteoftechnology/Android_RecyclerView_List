@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
                     imageArray.add(newImageData);
                     int imageIndex = imageArray.size() - 1;
+                    adapter.notifyItemInserted(imageIndex);
+
 
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(layoutManager);
