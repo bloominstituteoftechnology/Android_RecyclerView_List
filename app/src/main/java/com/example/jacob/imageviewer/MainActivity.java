@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private ArrayList<ImageData> imageArrayList = new ArrayList<>();
     LinearLayout LayoutImageList;
+
+    private GridLayoutManager layoutManager;
+    private RecyclerView listView;
+    private ImageListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +42,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        listView = findViewById(R.id.note_recycler_view);
+        listView.setHasFixedSize(true);
+        layoutManager = new GridLayoutManager(context, 2);
+        listView.setLayoutManager(layoutManager);
+        listAdapter = new ImageListAdapter(imageArrayList);
+        listView.setAdapter(listAdapter);
     }
 
     @Override
@@ -44,13 +56,12 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == IMAGE_REQUEST_CODE) {
                 Uri imageUri = data.getData();
-//                Log.i("Test", imageUri.getPath());
                 String imageName = imageUri.getPath().split("document/")[1];
-//                Log.i("Test", imageName);
                 ImageData selectedImage = new ImageData(imageUri, imageName);
                 imageArrayList.add(selectedImage);
-                LayoutImageList = findViewById(R.id.layout_imagelist);
-                LayoutImageList.addView(TextViewGenerator(imageName, imageArrayList.size()-1));
+                listAdapter.notifyItemInserted(imageArrayList.size()-1);
+//                LayoutImageList = findViewById(R.id.layout_imagelist);
+//                LayoutImageList.addView(TextViewGenerator(imageName, imageArrayList.size()-1));
             }
         }
 
