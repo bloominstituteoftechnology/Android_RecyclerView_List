@@ -43,12 +43,7 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(clickIntent);
             }
         });
-
-        Cursor cursor = getContentResolver().query(imageUri, null, null,
-                null, null);
-        cursor.moveToFirst();
-        String imageName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME));
-        ((TextView) findViewById(R.id.image_details_name)).setText(imageName);
+        ((TextView) findViewById(R.id.image_details_name)).setText(detailsImage.getImageName());
         ((TextView) findViewById(R.id.image_details_uri)).setText(imageUri.toString());
     }
 }
