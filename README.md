@@ -21,20 +21,20 @@ For this project, I'll walk you through the transition
 3. Give each element in this layout an id to be able to access it in the list adapter
 
 #### Build List Adapter
-1. Create a class called `ImageListAdapter` that `extends` `RecyclerView.Adapter<ImageListAdapter.ViewHolder>`
+1. Create a class called `com.example.jacob.imageviewer.ImageListAdapter` that `extends` `RecyclerView.Adapter<com.example.jacob.imageviewer.ImageListAdapter.ViewHolder>`
 2. Create an Inner Class called `ViewHolder` which `extends` `RecyclerView.ViewHolder`
 3. Add data members to this `ViewHolder` class for each of the views in your item layout
 4. Add a constructor to the `ViewHolder` that accepts a `View` object
 5. In the constructor, call the super constructor passing the view object to it with `super(view);`
 6. Attach all the views in the layout to the corresponding data members using `view.findViewById`
-7. In the `ImageListAdapter` class, add a data member for an `ArrayList` of `ImageData` objects and one for a `Context` object
+7. In the `com.example.jacob.imageviewer.ImageListAdapter` class, add a data member for an `ArrayList` of `ImageData` objects and one for a `Context` object
 8. Write a constructor method which accepts and stores the `ArrayList` member
 9. Override the `onCreateViewHolder` method
-> The signature should look like this `public ImageListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)`  
+> The signature should look like this `public com.example.jacob.imageviewer.ImageListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)`
 
 10. `Inflate` your item layout to a `View` object using `LayoutInflater.from(context).inflate(R.layout.image_list_view, parent, false);`
 11. Pass this `View` object to a `ViewHolder` constructor and return the new `ViewHolder` object
-12. Override the `onBindViewHolder` method using the signature `public void onBindViewHolder(ImageListAdapter.ViewHolder holder, int position)`
+12. Override the `onBindViewHolder` method using the signature `public void onBindViewHolder(com.example.jacob.imageviewer.ImageListAdapter.ViewHolder holder, int position)`
 13. Use the passed position parameter to `get` the `ImageData` object at that position of the `ArrayList`
 14. Take that object and use it to populate your layout
 > Remember, you have already bound the elements of your layout to your `ViewHolder` object and can now access them through the passed instance of that object, `holder.textImageName.setText(data.getName())`  
@@ -43,13 +43,13 @@ For this project, I'll walk you through the transition
 #### Attach List To Activity
 Now that we have built the components for our `RecyclerView`, it's time to bolt it all together
 1. Change your layout xml file to remove the `ScrollView` and `LinearLayout` and replace them with a single `RecyclerView`
-2. Add data members for a `RecyclerView`, `LayoutManager` (You can pick what you want, Linear, Grid, or Staggered), and your `ImageListAdapter`
+2. Add data members for a `RecyclerView`, `LayoutManager` (You can pick what you want, Linear, Grid, or Staggered), and your `com.example.jacob.imageviewer.ImageListAdapter`
 3. In your `OnCreate` method, attach your `RecyclerView`
 4. Call `setHasFixedSize(true)` on your `RecyclerView` object
 5. Create a new `LayoutManager` of the type you chose before. Check the corresponding documentation for information on the constructors for your chosen manager
 6. Call `setLayoutManager` on your `RecyclerView`, passing it your new `LayoutManager`
-7. Create a new instance of your `ImageListAdapter`, passing it the `ArrayList` of `ImageData` objects that you created last time
-8. Call `setAdapter` on your `RecyclerView`, passing it your instance of `ImageListAdapter`
+7. Create a new instance of your `com.example.jacob.imageviewer.ImageListAdapter`, passing it the `ArrayList` of `ImageData` objects that you created last time
+8. Call `setAdapter` on your `RecyclerView`, passing it your instance of `com.example.jacob.imageviewer.ImageListAdapter`
 
 #### Handle List Updates
 Since we are going to be manually adding elements to the `ArrayList`, we'll have to notify the `ListAdapter` when we do so.
