@@ -43,7 +43,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         ImageData imageData = imageList.get(i);
-        myViewHolder.txtTitle.setText(imageData.getName());
+        String  test = imageData.getName();
+        myViewHolder.txtTitle.setText(test);
         myViewHolder.imgPicture.setImageURI(imageData.getUri());
     }
 
