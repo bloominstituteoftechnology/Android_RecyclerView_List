@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ImageViewHolder> {
 
     private ArrayList<ImageData> imageDataArrayList;
-    Context context;
+    //Context context;
 
     public ImageListAdapter(ArrayList<ImageData> imageDataArrayList) {
         this.imageDataArrayList = imageDataArrayList;
@@ -22,14 +22,17 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
 
     @NonNull
     @Override
-    public ImageListAdapter.ImageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater.from(context).inflate(R.id.image_view_item_image, viewGroup, false);
-        return null;
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.id.constraint_layout_item, viewGroup, false);
+        return new ImageViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageListAdapter.ImageViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ImageListAdapter.ImageViewHolder viewHolder, int position) {
+        ImageData imageData=imageDataArrayList.get(position);
 
+        ImageViewHolder.textViewUri.setText(imageData.getUri().toString());
+        ImageViewHolder.textViewName.setText(imageData.getName());
     }
 
     @Override
