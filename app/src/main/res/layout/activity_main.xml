@@ -6,28 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <Button
+        android:id="@+id/button_add_image"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="Add Image to List"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:layout_gravity="center">
 
 
-        <LinearLayout
-            android:orientation="vertical"
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/linear_layout_child"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            >
-            <Button
-                android:id="@+id/button_add_image"
-                android:layout_gravity="center"
-                android:layout_marginTop="100sp"
-                android:text="Add Image to List"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            android:orientation="vertical"
+            tools:listitem="@layout/image_file_list_item">
 
-        </LinearLayout>
+
+        </android.support.v7.widget.RecyclerView>
     </ScrollView>
 
 
