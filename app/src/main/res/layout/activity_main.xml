@@ -24,8 +24,10 @@
         android:id="@+id/recycler_view"
         app:layout_constraintTop_toBottomOf="@id/viveks_image_viewer"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        app:layout_constraintBottom_toTopOf="@+id/add_image_button"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/add_image_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         >
 
 

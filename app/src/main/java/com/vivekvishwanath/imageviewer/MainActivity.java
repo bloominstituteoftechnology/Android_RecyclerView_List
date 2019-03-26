@@ -101,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
                 ImageData imageData = new ImageData();
                 imageData.setUri(imageUri);
                 imageData.setImageName(dataMemberIndex);
+                dataMemberIndex++;
                 imageDataMembers.add(imageData);
+
                 imageListAdapter.notifyItemInserted(imageDataMembers.size()-1);
             }
         }
