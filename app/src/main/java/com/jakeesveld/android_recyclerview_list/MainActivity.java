@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -25,13 +28,20 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout layoutList;
     Button buttonSelectImage;
+    ImageListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("ActivityLifecycle", getLocalClassName() + " - onCreate");
         setContentView(R.layout.activity_main);
-        layoutList = findViewById(R.id.layout_list);
+        listAdapter = new ImageListAdapter(list);
+        RecyclerView recyclerView = findViewById(R.id.image_recycler_view);
+        recyclerView.setAdapter(listAdapter);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
         buttonSelectImage = findViewById(R.id.button_select_image);
         buttonSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+/*
     public TextView createTextView(String name, int index){
         final TextView post = new TextView(getApplicationContext());
         post.setText(name);
@@ -64,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         return post;
 
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -73,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 String imageName = "Image#" + imageIndex.toString();
                 ImageData post = new ImageData(imageName, data.getData());
                 list.add(post);
-                TextView textView = createTextView(imageName, imageIndex);
-                layoutList.addView(textView);
+                listAdapter.notifyDataSetChanged();
                 imageIndex++;
 
             }

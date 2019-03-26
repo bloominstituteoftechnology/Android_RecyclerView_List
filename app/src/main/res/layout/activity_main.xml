@@ -14,7 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/image_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_image_layout" />
+
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -29,7 +35,7 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </ScrollView>-->
 
 
 </LinearLayout>
