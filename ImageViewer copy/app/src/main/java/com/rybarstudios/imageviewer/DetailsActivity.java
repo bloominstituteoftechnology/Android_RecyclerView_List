@@ -16,6 +16,7 @@ public class DetailsActivity extends AppCompatActivity implements Serializable {
 
     private Context context;
     private ImageView imageView;
+    private ImageData myImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +29,15 @@ public class DetailsActivity extends AppCompatActivity implements Serializable {
         imageView = findViewById(R.id.view_image);
 
         Intent imageIntent = getIntent();
-        final Uri imageUri = Uri.parse(imageIntent.getStringExtra(Intent.EXTRA_STREAM));
-        imageView.setImageURI(imageUri);
+//        final Uri imageUri = Uri.parse(imageIntent.getStringExtra(Intent.EXTRA_STREAM));
+        myImage = (ImageData) imageIntent.getSerializableExtra(Intent.EXTRA_STREAM);
+        imageView.setImageURI(myImage.getUri());
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FullscreenActivity.class);
-                intent.putExtra(Intent.EXTRA_STREAM, imageUri.toString());
+                intent.putExtra(Intent.EXTRA_STREAM, myImage.getUri());
                 startActivity(intent);
             }
         });

@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private ImageData imageData;
     ArrayList<ImageData> imageList;
+    private ImageListAdapter mImageListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         imageList = new ArrayList<>();
 
+        mImageListAdapter = new ImageListAdapter(imageList);
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setAdapter(mImageListAdapter);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
     }
 
     @Override
@@ -50,13 +61,12 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK && requestCode == IMAGE_REQUEST_CODE) {
            if(data != null) {
                Uri imageUri = data.getData();
-               imageData = new ImageData(imageUri, nextId++);
-               ((LinearLayout)findViewById(R.id.layout_images)).addView(generateTextView(imageData.getName()));
+               imageList.add(new ImageData(imageUri, nextId++));
            }
         }
     }
 
-    public TextView generateTextView(String imageName) {
+    /*public TextView generateTextView(String imageName) {
         TextView view = new TextView(this);
         view.setText(imageName);
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
@@ -73,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return view;
-    }
+    }*/
 
     @Override
     protected void onStart() {
