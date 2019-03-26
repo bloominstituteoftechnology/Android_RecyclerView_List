@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class ImageData implements Serializable {
     private Uri uri;
     private String name;
+    public static String TAG = "ImageData";
 
     ImageData(Uri uri) {
         this.uri = uri;
@@ -23,5 +24,9 @@ public class ImageData implements Serializable {
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

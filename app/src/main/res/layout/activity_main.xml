@@ -4,32 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
+    tools:showIn="@layout/image_item_layout"
     tools:context=".MainActivity">
 
-
-
-
     <Button
-        android:id="@+id/button_get_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
- />
-
-    <ScrollView
-        android:id="@+id/scrollview_image_list"
+        android:text="Add Image"
+        android:background="#ababab"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:id="@+id/scrollLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
-    </ScrollView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/image_recycler_view"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/image_item_layout"
+        android:layout_height="wrap_content"/>
 
 
 </android.support.constraint.ConstraintLayout>

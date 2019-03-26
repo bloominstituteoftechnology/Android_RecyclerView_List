@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button addButton;
     LinearLayout layoutScroll;
     ArrayList<ImageData> images;
+    static int TO_DETAILS_REQUEST = 42;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,22 +58,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private TextView createTextView(String text, int index) {
-        final TextView textView = new TextView(getApplicationContext());
-        textView.setPadding(15, 3, 3, 15);
-        textView.setText(text);
-        textView.setId(index);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), ImageDetails.class);
-                intent.putExtra("key", images.get(textView.getId()).getUri());
-                startActivity(intent);
-            }
-        });
-
-        INDEX++;
-        return textView;
-    }
 }
