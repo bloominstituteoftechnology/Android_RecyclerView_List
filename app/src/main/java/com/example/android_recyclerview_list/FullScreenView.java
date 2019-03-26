@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-public class FullScreenView extends AppCompatActivity {
+import java.io.Serializable;
+
+public class FullScreenView extends AppCompatActivity implements Serializable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,10 +16,9 @@ public class FullScreenView extends AppCompatActivity {
         setContentView(R.layout.activity_full_screen_view);
 
         Intent full = getIntent();
-        String fullString = full.getStringExtra("pic");
-        Uri fullPic = Uri.parse(fullString);
+        Uri fullPicUri = (Uri) full.getSerializableExtra("pic");
         ImageView picture = findViewById(R.id.fullscreen_pic);
-        picture.setImageURI(fullPic);
+        picture.setImageURI(fullPicUri);
     }
 
 

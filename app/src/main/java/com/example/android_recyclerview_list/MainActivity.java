@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.lang.annotation.Inherited;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,28 +27,23 @@ import java.util.List;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     public static final int IMAGE_REQUEST_CODE = 1;
-    Intent fullIntent;
-    static Context mainContext;
+    public static final int EDIT_IMAGE_REQUEST_CODE = 2;
     ImageListAdapter listAdapter;
+    Context context;
 
 
-    ArrayList picArray = new ArrayList<String>();
-    StoredImage storedImage;
+    ArrayList picArray = new ArrayList<StoredImage>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
-
-        mainContext = this;
+        context = this;
         listAdapter = new ImageListAdapter(picArray);
         setContentView ( R.layout.activity_main );
-
         Button      addButton   = findViewById ( R.id.button_add_to_list );
-
-
         addButton.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -57,21 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult ( intent, IMAGE_REQUEST_CODE );
             }
         } );
-
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         if(resultCode == RESULT_OK && requestCode == IMAGE_REQUEST_CODE){
             if(data != null){
-                ImageView picView = findViewById ( R.id.pic_image_view );
                 Uri dataUri = data.getData();
                 //TODO
-                String dataString = dataUri.toString ();
-                picArray.add(dataString);
-                int listIndex = picArray.indexOf(dataString);
-
+                StoredImage dataImage = new StoredImage(dataUri);
+                picArray.add(dataImage);
                 listAdapter = new ImageListAdapter(picArray);
+                listAdapter.notifyItemInserted(picArray.size() -1);
                 RecyclerView recyclerView = findViewById(R.id.image_recycler_view);
                 recyclerView.setAdapter(listAdapter);
                 LinearLayoutManager layoutManager = new LinearLayoutManager((this));

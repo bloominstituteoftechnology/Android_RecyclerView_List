@@ -1,5 +1,6 @@
 package com.example.android_recyclerview_list;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -12,12 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public  class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> {
+public  class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> implements Serializable {
 
-ArrayList<StoredImage> entryData;
+private ArrayList<StoredImage> entryData;
 
 
     public ImageListAdapter(ArrayList<StoredImage> entryData) {
@@ -34,23 +36,14 @@ ArrayList<StoredImage> entryData;
     @Override
     public void onBindViewHolder(ImageListAdapter.ViewHolder holder, int position) {
         final StoredImage data = entryData.get(position);
-        final int listIndex = position;
-        final String dataString = data.getUriString();
-        holder.itemImageView.setImageURI(Uri.parse(dataString));
-        holder.itemTextView.setText(dataString);
-        //        textView.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                fullIntent.putExtra("index", listIndex);
-        //                fullIntent.putExtra("name", imageText );
-        //                startActivity(fullIntent);
+        holder.itemImageView.setImageURI(data.getUriPic());
+        holder.itemTextView.setText(data.getUriString());
         holder.itemTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent fullIntent = new Intent(MainActivity.mainContext, ImageDetails.class);
-                fullIntent.putExtra("index", listIndex);
+                Intent fullIntent = new Intent(v.getContext(), ImageDetails.class);
                 fullIntent.putExtra("name",data);
-                MainActivity.mainContext.startActivity(fullIntent);
+                ((Activity)v.getContext()).startActivityForResult(fullIntent, MainActivity.EDIT_IMAGE_REQUEST_CODE);
             }
         });
 
