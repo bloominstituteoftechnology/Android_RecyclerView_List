@@ -1,0 +1,107 @@
+package com.rybarstudios.imageviewer;
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+
+public class MainActivity extends AppCompatActivity {
+
+    public static final int IMAGE_REQUEST_CODE = 54;
+    static int nextId = 0;
+    private Context context;
+    private ImageData imageData;
+    ArrayList<ImageData> imageList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Log.i("ActivityLifecycle", getLocalClassName() + " - onCreate");
+        context = this;
+
+        findViewById(R.id.button_add_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent imageIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                imageIntent.setType("image/*");
+                startActivityForResult(imageIntent, IMAGE_REQUEST_CODE);
+
+            }
+        });
+
+        imageList = new ArrayList<>();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && requestCode == IMAGE_REQUEST_CODE) {
+           if(data != null) {
+               Uri imageUri = data.getData();
+               imageData = new ImageData(imageUri, nextId++);
+               ((LinearLayout)findViewById(R.id.layout_images)).addView(generateTextView(imageData.getName()));
+           }
+        }
+    }
+
+    public TextView generateTextView(String imageName) {
+        TextView view = new TextView(this);
+        view.setText(imageName);
+        view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        view.setPadding(15, 15, 15, 15);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent imageDetails = new Intent(context, DetailsActivity.class);
+                imageDetails.putExtra(Intent.EXTRA_STREAM, imageData.getUri().toString());
+                imageDetails.putExtra(Intent.EXTRA_TEXT, imageData.getName());
+                startActivity(imageDetails);
+
+            }
+        });
+        return view;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("ActivityLifecycle", getLocalClassName() + " - onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("ActivityLifecycle", getLocalClassName() + " - onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("ActivityLifecycle", getLocalClassName() + " - onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("ActivityLifecycle", getLocalClassName() + " - onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("ActivityLifecycle", getLocalClassName() + " - onDestroy");
+    }
+}
