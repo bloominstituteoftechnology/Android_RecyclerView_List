@@ -33,9 +33,9 @@ ArrayList<StoredImage> entryData;
 
     @Override
     public void onBindViewHolder(ImageListAdapter.ViewHolder holder, int position) {
-        StoredImage data = entryData.get(position);
+        final StoredImage data = entryData.get(position);
         final int listIndex = position;
-        final String dataString = data.toString();
+        final String dataString = data.getUriString();
         holder.itemImageView.setImageURI(Uri.parse(dataString));
         holder.itemTextView.setText(dataString);
         //        textView.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +49,7 @@ ArrayList<StoredImage> entryData;
             public void onClick(View v) {
                 Intent fullIntent = new Intent(MainActivity.mainContext, ImageDetails.class);
                 fullIntent.putExtra("index", listIndex);
-                fullIntent.putExtra("name", dataString);
+                fullIntent.putExtra("name",data);
                 MainActivity.mainContext.startActivity(fullIntent);
             }
         });
