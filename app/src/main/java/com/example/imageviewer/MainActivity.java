@@ -1,0 +1,78 @@
+package com.example.imageviewer;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import static android.content.Intent.ACTION_GET_CONTENT;
+
+public class MainActivity extends AppCompatActivity {
+
+    private static int INDEX = 0;
+
+    Button addButton;
+    LinearLayout layoutScroll;
+    ArrayList<ImageData> images;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        images = new ArrayList<>();
+
+        layoutScroll = findViewById(R.id.scrollLayout);
+
+        addButton = findViewById(R.id.button_get_image);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, INDEX);
+            }
+        });
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+
+        if (resultCode == RESULT_OK && requestCode == INDEX) {
+            if (data != null) {
+                Uri dataUri = data.getData();
+
+                images.add(INDEX, new ImageData(dataUri));
+                layoutScroll.addView(createTextView(Uri.parse(images.get(INDEX).getUri()).getLastPathSegment(), INDEX));
+            }
+        }
+    }
+
+    private TextView createTextView(String text, int index) {
+        final TextView textView = new TextView(getApplicationContext());
+        textView.setPadding(15, 3, 3, 15);
+        textView.setText(text);
+        textView.setId(index);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), ImageDetails.class);
+                intent.putExtra("key", images.get(textView.getId()).getUri());
+                startActivity(intent);
+            }
+        });
+
+        INDEX++;
+        return textView;
+    }
+}
