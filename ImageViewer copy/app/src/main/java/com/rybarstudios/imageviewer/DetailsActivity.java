@@ -29,7 +29,7 @@ public class DetailsActivity extends AppCompatActivity implements Serializable {
         imageView = findViewById(R.id.view_image);
 
         Intent imageIntent = getIntent();
-//        final Uri imageUri = Uri.parse(imageIntent.getStringExtra(Intent.EXTRA_STREAM));
+
         myImage = (ImageData) imageIntent.getSerializableExtra(Intent.EXTRA_STREAM);
         imageView.setImageURI(myImage.getUri());
 
