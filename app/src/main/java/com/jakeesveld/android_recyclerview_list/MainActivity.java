@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 String imageName = "Image#" + imageIndex.toString();
                 ImageData post = new ImageData(imageName, data.getData());
                 list.add(post);
-                listAdapter.notifyDataSetChanged();
+                listAdapter.notifyItemChanged(list.size() - 1);
                 imageIndex++;
 
             }
