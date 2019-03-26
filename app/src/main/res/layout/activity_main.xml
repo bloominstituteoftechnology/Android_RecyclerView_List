@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/image_scroll_view"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/image_list_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Vivek's Image Viewer"
+                android:textSize="26sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add_image_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Image"
+        android:padding="10dp"
+        />
+
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Click on listed image to view details"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        />
+
+</LinearLayout>
