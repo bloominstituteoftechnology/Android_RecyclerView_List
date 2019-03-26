@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setAdapter(mImageListAdapter);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
     }
@@ -61,7 +61,10 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK && requestCode == IMAGE_REQUEST_CODE) {
            if(data != null) {
                Uri imageUri = data.getData();
-               imageList.add(new ImageData(imageUri, nextId++));
+               if (imageUri != null) {
+                   imageList.add(new ImageData(imageUri, nextId++));
+                   mImageListAdapter.notifyItemChanged(imageList.size() - 1);
+               }
            }
         }
     }

@@ -42,9 +42,9 @@ public class DetailsActivity extends AppCompatActivity implements Serializable {
             }
         });
 
-        ((TextView)findViewById(R.id.view_image_name)).setText(imageIntent.getStringExtra(Intent.EXTRA_TEXT));
+        ((TextView)findViewById(R.id.view_image_name)).setText(myImage.getName());
 
-        ((TextView)findViewById(R.id.view_image_uri)).setText(imageIntent.getStringExtra(Intent.EXTRA_STREAM));
+        ((TextView)findViewById(R.id.view_image_uri)).setText(myImage.getUri().toString());
 
     }
 
