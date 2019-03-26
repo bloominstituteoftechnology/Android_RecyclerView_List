@@ -37,7 +37,7 @@ public class DetailsActivity extends AppCompatActivity implements Serializable {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FullscreenActivity.class);
-                intent.putExtra(Intent.EXTRA_STREAM, myImage.getUri());
+                intent.putExtra(Intent.EXTRA_STREAM, myImage.getUri().toString());
                 startActivity(intent);
             }
         });
