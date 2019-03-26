@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,14 +29,26 @@ public class MainActivity extends AppCompatActivity {
     private int dataMemberIndex = 0;
     private Context context;
 
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    ImageListAdapter imageListAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("ActivityLifeCycle", getLocalClassName() + " - onCreate");
         setContentView(R.layout.activity_main);
-
         context = this;
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        imageListAdapter = new ImageListAdapter(imageDataMembers);
+        recyclerView.setAdapter(imageListAdapter);
+
 
         addImageButton = findViewById(R.id.add_image_button);
         addImageButton.setOnClickListener(new View.OnClickListener() {
@@ -45,10 +59,6 @@ public class MainActivity extends AppCompatActivity {
                                                   startActivityForResult(intent, REQUEST_CODE);
                                               }
                                           } );
-
-
-        imageListLayout = findViewById(R.id.image_list_layout);
-        imageScrollView = findViewById(R.id.image_scroll_view);
 
 
     }
@@ -83,26 +93,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i("ActivityLifeCycle", getLocalClassName() + " - onDestroy");
     }
 
-    public TextView createTextView(String imageText, final int index) {
-        TextView textView = new TextView(this);
-        textView.setPadding(10,10,10,10);
-        textView.setTextColor(getResources().getColor(android.R.color.black));
-        textView.setTextSize(20);
-        textView.setPadding(10,10,10,10);
-        textView.setText(imageText);
-        textView.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageData imageData = imageDataMembers.get(index);
-                Intent detailsIntent = new Intent(getApplicationContext(), DetailsActivity.class);
-                detailsIntent.putExtra("image", imageData);
-                startActivity(detailsIntent);
-            }
-        });
-        return textView;
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
@@ -112,8 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 imageData.setUri(imageUri);
                 imageData.setImageName(dataMemberIndex);
                 imageDataMembers.add(imageData);
-                imageListLayout.addView(createTextView(imageData.getImageName(), dataMemberIndex));
-                dataMemberIndex++;
+                imageListAdapter.notifyItemInserted(imageDataMembers.size()-1);
             }
         }
     }
