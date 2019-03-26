@@ -24,7 +24,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
 
         setContentView(R.layout.image_details);
 
-        imageView = findViewById(R.id.image_view_image);
+        imageView = findViewById(R.id.image_view_item_image);
         textViewName = findViewById(R.id.text_view_image_name);
         textViewUri = findViewById(R.id.text_view_uri_name);
 
