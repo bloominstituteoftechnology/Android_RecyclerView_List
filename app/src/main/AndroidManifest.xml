@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android_recyclerlist">
+    package="com.example.recyclerlist">
 
     <application
         android:allowBackup="true"
@@ -10,12 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.android_recyclerlist.FullscreenActivity"
+            android:name="com.example.recyclerlist.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen"
             android:theme="@style/FullscreenTheme"></activity>
-        <activity android:name="com.example.android_recyclerlist.image_details" />
-        <activity android:name="com.example.android_recyclerlist.MainActivity">
+        <activity android:name="com.example.recyclerlist.image_details" />
+        <activity android:name="com.example.recyclerlist.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
