@@ -9,6 +9,9 @@ import java.io.Serializable;
 public class StoredImage implements Serializable {
     private Uri uriPic;
 
+
+
+
     public String setUri(Uri uriPic){
         String uriString = uriPic.toString();
         return uriString;

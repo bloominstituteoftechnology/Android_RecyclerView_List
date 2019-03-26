@@ -21,30 +21,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/layout_linear_scroll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="All Images added will be Listed below:"
-                android:textSize="35sp"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textStyle="bold"
-                android:typeface="serif"
-                android:paddingStart="10sp"
-                android:paddingEnd="10sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-    </ScrollView>
+    </android.support.v7.widget.RecyclerView>
 
 
 

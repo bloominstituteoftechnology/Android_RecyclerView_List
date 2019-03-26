@@ -3,6 +3,7 @@ package com.example.android_recyclerview_list;
 
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.Nullable;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int IMAGE_REQUEST_CODE = 1;
     Intent fullIntent;
-
+    static Context mainContext;
 
 
     ArrayList picArray = new ArrayList<String>();
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
-
+        mainContext = this;
         setContentView ( R.layout.activity_main );
 
         Button      addButton   = findViewById ( R.id.button_add_to_list );
@@ -83,18 +84,6 @@ public class MainActivity extends AppCompatActivity {
         textView.setPadding ( 10,10,10,10 );
         textView.setWidth ( 200);
         textView.setHeight ( 100 );
-        textView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                fullIntent.putExtra("index", listIndex);
-                fullIntent.putExtra("name", imageText );
-                startActivity(fullIntent);
-
-
-            }
-        });
-
         return textView;
     }
 }
