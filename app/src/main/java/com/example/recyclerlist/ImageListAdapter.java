@@ -1,6 +1,8 @@
 package com.example.recyclerlist;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.jar.JarOutputStream;
 
 
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> {
@@ -30,12 +33,30 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        final ImageData data = imageList.get(i);
+
+        viewHolder.nameTextView.setText(data.getName());
+        viewHolder.uriTextView.setText(data.getUri().toString());
+        viewHolder.imageView.setImageURI(data.getUri());
+
+        viewHolder.parentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageData temp;
+                //temp = imageList.get(number);
+                Intent intent = new Intent(v.getContext(),image_details.class);
+                //intent.putExtra("Image_Key", temp);
+                context.startActivity(intent);
+
+
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return this.imageList.size();
     }
 
     // S02M02-4 our connection to the views in the layout

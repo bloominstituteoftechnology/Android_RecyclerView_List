@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +28,23 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ImageData> imageList = new ArrayList<>();
 
 
+    RecyclerView recyclerView;
+    ImageListAdapter listAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i("ActivityStateTracking", String.format("%s - onCreate", getLocalClassName()));
+
+
+        recyclerView = findViewById(R.id.actual_recycle_view);
+        recyclerView.setAdapter(listAdapter);
+
+        listAdapter = new ImageListAdapter(imageList);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(llm);
+
 
         // Listener for pushing the add-image button, implicit intent to get image
         findViewById(R.id.button_add_image).setOnClickListener(new View.OnClickListener() {
@@ -54,18 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //TextView generator's onclick listener
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageData temp;
-                temp = imageList.get(number);
-                Intent intent = new Intent(getApplicationContext(),image_details.class);
-                intent.putExtra("Image_Key", temp);
-                startActivity(intent);
 
-
-            }
-        });
 
         return tv;
     }
@@ -81,12 +84,15 @@ public class MainActivity extends AppCompatActivity {
                 imageData = new ImageData("name",dataUri.toString());
                 imageList.add (imageIndex,imageData);    //Create an ArrayList of ImageDatas
 
+                listAdapter.notifyItemInserted(imageList.size()-1);
 
-                ImageData temp = imageList.get(imageIndex);
+
+
+                //ImageData temp = imageList.get(imageIndex);
 
                 //createView(temp.toString(),i); //create views
-                linearLayoutChild = findViewById(R.id.linear_layout_child);
-                linearLayoutChild.addView(createView(temp.toString(),imageIndex++)); //last time imageIndex is referenced before it can be incremented
+                //linearLayoutChild = findViewById(R.id.linear_layout_child);
+                //linearLayoutChild.addView(createView(temp.toString(),imageIndex++)); //last time imageIndex is referenced before it can be incremented
 
             }
         }
