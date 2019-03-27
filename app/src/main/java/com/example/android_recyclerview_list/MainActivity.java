@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     public static final int EDIT_IMAGE_REQUEST_CODE = 2;
     ImageListAdapter listAdapter;
     Context context;
+    RecyclerView recyclerView;
 
 
     ArrayList picArray = new ArrayList<StoredImage>();
@@ -41,8 +42,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         context = this;
-        listAdapter = new ImageListAdapter(picArray);
+
         setContentView ( R.layout.activity_main );
+
         Button      addButton   = findViewById ( R.id.button_add_to_list );
         addButton.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -53,6 +55,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 startActivityForResult ( intent, IMAGE_REQUEST_CODE );
             }
         } );
+
+        listAdapter = new ImageListAdapter(picArray);
+        recyclerView = findViewById(R.id.image_recycler_view);
+        recyclerView.setAdapter(listAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager((this));
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
@@ -64,10 +72,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 picArray.add(dataImage);
                 listAdapter = new ImageListAdapter(picArray);
                 listAdapter.notifyItemInserted(picArray.size() -1);
-                RecyclerView recyclerView = findViewById(R.id.image_recycler_view);
-                recyclerView.setAdapter(listAdapter);
-                LinearLayoutManager layoutManager = new LinearLayoutManager((this));
-                recyclerView.setLayoutManager(layoutManager);
+
+
 
             }
         }
