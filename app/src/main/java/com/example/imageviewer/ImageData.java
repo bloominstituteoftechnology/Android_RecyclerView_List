@@ -8,10 +8,12 @@ public class ImageData implements Serializable {
     private Uri uri;
     private String name;
     public static String TAG = "ImageData";
+    private int id;
 
-    ImageData(Uri uri) {
+    ImageData(Uri uri, int id) {
         this.uri = uri;
         name = uri.getLastPathSegment();
+        this.id = id;
     }
 
     public String getUri() {
@@ -24,6 +26,10 @@ public class ImageData implements Serializable {
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getName() {

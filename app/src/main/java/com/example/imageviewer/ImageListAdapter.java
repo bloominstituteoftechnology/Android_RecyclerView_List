@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder>{
+public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ImageDataViewHolder>{
 
     ArrayList<ImageData> imageData;
 
@@ -24,34 +25,36 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
         this.imageData = imageData;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ImageDataViewHolder extends RecyclerView.ViewHolder{
 
         TextView imageNameView;
         ImageView imageView;
         View parentView;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ImageDataViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            Log.i("testone", "onBindViewHolder : called,");
             imageNameView = itemView.findViewById(R.id.image_name_text_view);
             imageView = itemView.findViewById(R.id.imageView);
-
             parentView = itemView.findViewById(R.id.list_parent);
-
         }
     }
 
+
     @NonNull
     @Override
-    public ImageListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.image_item_layout, parent, false);
-        return null;
+    public ImageDataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_item_layout, parent, false);
+        Log.i("testone", "onBindViewHolder : called,");
+        return new ImageDataViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ImageListAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ImageDataViewHolder viewHolder, int i) {
         final ImageData data = imageData.get(i);
+
+        Log.i("testone", "onBindViewHolder : called,");
 
         viewHolder.imageView.setImageURI(Uri.parse(data.getUri()));
         viewHolder.imageNameView.setText(data.getName());
@@ -68,6 +71,6 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
 
     @Override
     public int getItemCount() {
-        return imageData.size();
+        return this.imageData.size();
     }
 }
