@@ -12,8 +12,7 @@
         android:layout_margin="15dp"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_launcher_background"
-        android:layout_height="90dp">
-    </ImageView>
+        android:layout_height="90dp"/>
 
     <TextView
         android:id="@+id/image_name_text_view"

@@ -4,7 +4,7 @@ import android.net.Uri;
 
 import java.io.Serializable;
 
-public class ImageData implements Serializable {
+public class ImageData {
     private Uri uri;
     private String name;
     public static String TAG = "ImageData";

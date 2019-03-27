@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private static int INDEX = 0;
 
     Button addButton;
-    LinearLayout listLayout;
     ImageListAdapter listAdapter;
     ArrayList<ImageData> images;
     RecyclerView recyclerView;
@@ -39,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         recyclerView = findViewById(R.id.image_recycler_view);
         recyclerView.setHasFixedSize(true);
         images = new ArrayList<>();
@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(layoutManager);
+
+
+/*        images.add(new ImageData(Uri.parse("testing"), 0));
+        images.add(new ImageData(Uri.parse("testing"), 1));*/
 
         addButton = findViewById(R.id.add_image_button);
         addButton.setOnClickListener(new View.OnClickListener() {

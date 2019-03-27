@@ -1,7 +1,6 @@
 package com.example.imageviewer;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -15,24 +14,23 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ImageDataViewHolder>{
+public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder>{
 
     ArrayList<ImageData> imageData;
 
-    Context context;
 
     public ImageListAdapter(ArrayList<ImageData> imageData){
         this.imageData = imageData;
     }
 
-    class ImageDataViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView imageNameView;
         ImageView imageView;
         View parentView;
 
 
-        public ImageDataViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Log.i("testone", "onBindViewHolder : called,");
             imageNameView = itemView.findViewById(R.id.image_name_text_view);
@@ -44,28 +42,29 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
 
     @NonNull
     @Override
-    public ImageDataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_item_layout, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_item_layout, parent, false);
         Log.i("testone", "onBindViewHolder : called,");
-        return new ImageDataViewHolder(itemView);
+        return new ViewHolder(v);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull ImageDataViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final ImageData data = imageData.get(i);
 
         Log.i("testone", "onBindViewHolder : called,");
 
         viewHolder.imageView.setImageURI(Uri.parse(data.getUri()));
         viewHolder.imageNameView.setText(data.getName());
-        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+/*        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ImageDetails.class);
                 intent.putExtra(ImageData.TAG, imageData);
                 ((Activity)v.getContext()).startActivityForResult(intent,MainActivity.TO_DETAILS_REQUEST);
             }
-        });
+        });*/
 
     }
 
