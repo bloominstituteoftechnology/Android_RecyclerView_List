@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private LinearLayout linearLayout;
     private ImageData imageData;
-    private ArrayList<ImageData> arrayList = new ArrayList<ImageData>();
+    private ArrayList<ImageData> arrayList = new ArrayList<>();
     ImageListAdapter imageListAdapter;
     Context context;
 
@@ -37,7 +39,19 @@ public class MainActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.linear_layout_list_images);
 
-//        imageListAdapter=new ImageListAdapter(ImageListAdapter.ImageViewHolder.)
+        entryList = repo.readAllEntries();
+
+
+        imageListAdapter = new ImageListAdapter(entryList);
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+
+        recyclerView.setAdapter(imageListAdapter);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        ImageListAdapter imageListAdapter2 = new ImageListAdapter(imageListAdapter);
     }
 
     @Override
