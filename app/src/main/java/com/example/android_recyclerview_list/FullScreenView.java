@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import java.io.Serializable;
 
-public class FullScreenView extends AppCompatActivity implements Serializable {
+public class FullScreenView extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

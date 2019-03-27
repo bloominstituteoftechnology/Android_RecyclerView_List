@@ -27,7 +27,7 @@ import java.util.List;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity  {
 
     public static final int IMAGE_REQUEST_CODE = 1;
     public static final int EDIT_IMAGE_REQUEST_CODE = 2;

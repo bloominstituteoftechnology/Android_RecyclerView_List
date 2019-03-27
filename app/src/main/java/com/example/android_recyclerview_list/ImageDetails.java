@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-public class ImageDetails extends AppCompatActivity implements Serializable {
+public class ImageDetails extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class ImageDetails extends AppCompatActivity implements Serializable {
         TextView fullScreen = findViewById(R.id.fullscreen_content);
         ImageView fullPic = findViewById(R.id.fullscreen_picture);
         Intent intent = getIntent();
-        final StoredImage image = (StoredImage) intent.getSerializableExtra("name");
+        final StoredImage image = (StoredImage) intent.getSerializableExtra("names");
         fullPic.setImageURI(image.getUriPic());
         fullScreen.setText(image.getUriString());
 

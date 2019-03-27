@@ -17,7 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public  class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> implements Serializable {
+public  class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder>  {
 
 private ArrayList<StoredImage> entryData;
 
@@ -34,16 +34,16 @@ private ArrayList<StoredImage> entryData;
     }
 
     @Override
-    public void onBindViewHolder(ImageListAdapter.ViewHolder holder, int position) {
-        final StoredImage data = entryData.get(position);
-        holder.itemImageView.setImageURI(data.getUriPic());
-        holder.itemTextView.setText(data.getUriString());
+    public void onBindViewHolder(@NonNull ImageListAdapter.ViewHolder holder, int position) {
+        final StoredImage imageata = entryData.get(position);
+        holder.itemImageView.setImageURI(imageata.getUriPic());
+        holder.itemTextView.setText(imageata.getUriString());
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent fullIntent = new Intent(v.getContext(), ImageDetails.class);
-                fullIntent.putExtra("name",data);
-                ((Activity)v.getContext()).startActivityForResult(fullIntent, MainActivity.EDIT_IMAGE_REQUEST_CODE);
+                Intent detailIntent = new Intent(v.getContext(), ImageDetails.class);
+                detailIntent.putExtra("names",imageata);
+                ((Activity)v.getContext()).startActivity(detailIntent);
             }
         });
 
