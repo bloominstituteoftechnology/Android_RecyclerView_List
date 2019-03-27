@@ -1,5 +1,6 @@
 package com.lambdaschool.android_recyclerview_list;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.Nullable;
@@ -21,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private ImageData imageData;
     private ArrayList<ImageData> arrayList = new ArrayList<ImageData>();
+    ImageListAdapter imageListAdapter;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        context=this;
         Log.i("ActivityStateTracking", String.format("%s - onCreate", getLocalClassName()));
 
         setContentView(R.layout.activity_main);
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button_pick_image);
 
         linearLayout = findViewById(R.id.linear_layout_list_images);
+
+//        imageListAdapter=new ImageListAdapter(ImageListAdapter.ImageViewHolder.)
     }
 
     @Override
@@ -46,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
                 arrayList.add(imageData2);
                 int elementIndex = arrayList.indexOf(imageData2);
                 imageData2.setName("Image: " + elementIndex);
-                linearLayout.addView(generateTextView(imageData2.getName(), elementIndex));
+//                linearLayout.addView(generateTextView(imageData2.getName(), elementIndex));
             }
         }
     }
 
-    private TextView generateTextView(String text, final int elementIndex) {
+/*    private TextView generateTextView(String text, final int elementIndex) {
         TextView newTextView = new TextView(this);
         newTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         newTextView.setText(text);
@@ -66,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return newTextView;
-    }
+    }*/
 
     @Override
     protected void onStart() {
