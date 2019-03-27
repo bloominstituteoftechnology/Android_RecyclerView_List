@@ -1,5 +1,6 @@
 package com.example.recyclerlist;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,11 +18,11 @@ import java.util.jar.JarOutputStream;
 
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> {
 
-    ArrayList<ImageData> imageList = new ArrayList<>();
+    ArrayList<ImageData> imageList;
     Context context;
 
-    public ImageListAdapter(ArrayList<ImageData> entryData) {
-        this.imageList = entryData;
+    public ImageListAdapter(ArrayList<ImageData> imageList) {
+        this.imageList = imageList;
     }
 
     @NonNull
@@ -42,11 +43,11 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
         viewHolder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageData temp;
-                //temp = imageList.get(number);
                 Intent intent = new Intent(v.getContext(),image_details.class);
-                //intent.putExtra("Image_Key", temp);
-                context.startActivity(intent);
+                intent.putExtra("Image_Key", data);
+                ((Activity)v.getContext()).startActivity(intent);
+                        //.getContext.startActivity(intent);
+
 
 
             }
@@ -72,10 +73,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
                 nameTextView = itemView.findViewById(R.id.recycler_textView_name);
                 uriTextView = itemView.findViewById(R.id.recycler_textview_uri);
                 imageView = itemView.findViewById(R.id.recycler_image_view);
-
                 parentView = itemView.findViewById(R.id.recycler_parent_view);
             }
         }
-
-
 }

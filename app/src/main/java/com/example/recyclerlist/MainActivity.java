@@ -38,12 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("ActivityStateTracking", String.format("%s - onCreate", getLocalClassName()));
 
 
-        recyclerView = findViewById(R.id.actual_recycle_view);
-        recyclerView.setAdapter(listAdapter);
 
-        listAdapter = new ImageListAdapter(imageList);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(llm);
 
 
         // Listener for pushing the add-image button, implicit intent to get image
@@ -56,9 +51,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+                recyclerView = findViewById(R.id.actual_recycle_view);
+                listAdapter = new ImageListAdapter(imageList);
+                recyclerView.setAdapter(listAdapter);
+                LinearLayoutManager llm = new LinearLayoutManager(this);
+                recyclerView.setLayoutManager(llm);
     }
     //TextView generator
-    public TextView createView(String text,final int number){
+   /* public TextView createView(String text,final int number){
 
         TextView tv = new TextView(this);
         text = "#" + number + ": " + text;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         return tv;
-    }
+    }*/
 
 
 
@@ -82,18 +82,10 @@ public class MainActivity extends AppCompatActivity {
             if (data != null) {
                 Uri dataUri = data.getData();
                 imageData = new ImageData("name",dataUri.toString());
-                imageList.add (imageIndex,imageData);    //Create an ArrayList of ImageDatas
+                imageList.add (imageIndex++,imageData);    //Update arraylist of imageDatas
 
-                listAdapter.notifyItemInserted(imageList.size()-1);
-
-
-
-                //ImageData temp = imageList.get(imageIndex);
-
-                //createView(temp.toString(),i); //create views
-                //linearLayoutChild = findViewById(R.id.linear_layout_child);
-                //linearLayoutChild.addView(createView(temp.toString(),imageIndex++)); //last time imageIndex is referenced before it can be incremented
-
+               // listAdapter.notifyDataSetChanged();
+                listAdapter.notifyItemChanged(imageList.size());
             }
         }
     }
