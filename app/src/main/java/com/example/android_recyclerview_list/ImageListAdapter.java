@@ -38,7 +38,7 @@ private ArrayList<StoredImage> entryData;
         final StoredImage data = entryData.get(position);
         holder.itemImageView.setImageURI(data.getUriPic());
         holder.itemTextView.setText(data.getUriString());
-        holder.itemTextView.setOnClickListener(new View.OnClickListener() {
+        holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent fullIntent = new Intent(v.getContext(), ImageDetails.class);

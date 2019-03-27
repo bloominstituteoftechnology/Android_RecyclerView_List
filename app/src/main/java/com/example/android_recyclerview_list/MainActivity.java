@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         LinearLayoutManager layoutManager = new LinearLayoutManager((this));
         recyclerView.setLayoutManager(layoutManager);
     }
-
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         if(resultCode == RESULT_OK && requestCode == IMAGE_REQUEST_CODE){
             if(data != null){
@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 //TODO
                 StoredImage dataImage = new StoredImage(dataUri);
                 picArray.add(dataImage);
-                listAdapter = new ImageListAdapter(picArray);
                 listAdapter.notifyItemInserted(picArray.size() -1);
 
 
