@@ -28,7 +28,6 @@ public class ImageData implements Serializable {
     public static ArrayList<ImageData> getTestSamples() {
         ArrayList<ImageData> testSamplesAR = new ArrayList<>();
 
-
         for (int i = 0; i < 100; i++) {
             ImageData dupeToAdd=new ImageData();
             dupeToAdd.setName("Image: "+i);

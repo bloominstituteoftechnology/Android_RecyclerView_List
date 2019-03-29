@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         //LinearLayout linearLayout = findViewById(R.id.linear_layout_list_images);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        arrayList=ImageData.getTestSamples();
+        //arrayList=ImageData.getTestSamples();
         imageListAdapter = new ImageListAdapter(arrayList);
         recyclerView.setAdapter(imageListAdapter);
         recyclerView.setHasFixedSize(false);
@@ -54,16 +54,16 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == 1) {
             if (data != null) {
                 Uri dataUri = data.getData();
-                ImageData imageData2 = new ImageData();
-                imageData2.setName(((Uri)dataUri).toString());
-                imageData2.setUri(dataUri);
-                arrayList.add(imageData2);
-                int elementIndex = arrayList.indexOf(imageData2);
-                imageData2.setName("Image: " + elementIndex);
+                ImageData imageData = new ImageData();
+                imageData.setName(((Uri)dataUri).toString());
+                imageData.setUri(dataUri);
+                arrayList.add(imageData);
+                int elementIndex = arrayList.indexOf(imageData);
+                imageData.setName("Image: " + elementIndex);
                 imageListAdapter.notifyDataSetChanged();
 
                 Intent intent = new Intent(getApplicationContext(), ImageDetailsActivity.class);
-                intent.putExtra("Image", imageData2);
+                intent.putExtra("Image", imageData);
                 startActivity(intent);
 //                linearLayout.addView(generateTextView(imageData2.getName(), elementIndex));
             }
