@@ -1,6 +1,7 @@
 package com.lambdaschool.android_recyclerview_list;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,9 +25,9 @@ public class ImageDetailsActivity extends AppCompatActivity {
 
         setContentView(R.layout.image_details);
 
-        imageView = findViewById(R.id.image_view_item_image);
-        textViewName = findViewById(R.id.text_view_image_name);
-        textViewUri = findViewById(R.id.text_view_uri_name);
+        imageView = findViewById(R.id.image_view_details_image);
+        textViewName = findViewById(R.id.text_view_details_name);
+        textViewUri = findViewById(R.id.text_view_details_uri);
 
         Intent intent = getIntent();
         final ImageData newImageData = (ImageData)intent.getSerializableExtra("Image");

@@ -20,38 +20,33 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
-    private LinearLayout linearLayout;
-    private ImageData imageData;
     private ArrayList<ImageData> arrayList = new ArrayList<>();
     ImageListAdapter imageListAdapter;
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context=this;
         Log.i("ActivityStateTracking", String.format("%s - onCreate", getLocalClassName()));
 
         setContentView(R.layout.activity_main);
-
-        button = findViewById(R.id.button_pick_image);
-
-        linearLayout = findViewById(R.id.linear_layout_list_images);
-
-        entryList = repo.readAllEntries();
-
-
-        imageListAdapter = new ImageListAdapter(entryList);
-
+        //LinearLayout linearLayout = findViewById(R.id.linear_layout_list_images);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-
-        recyclerView.setAdapter(imageListAdapter);
-        recyclerView.setHasFixedSize(true);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        arrayList=ImageData.getTestSamples();
+        imageListAdapter = new ImageListAdapter(arrayList);
+        recyclerView.setAdapter(imageListAdapter);
+        recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(layoutManager);
-        ImageListAdapter imageListAdapter2 = new ImageListAdapter(imageListAdapter);
+
+        Button button = findViewById(R.id.button_pick_image);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, 1);
+            }
+        });
     }
 
     @Override
@@ -65,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
                 arrayList.add(imageData2);
                 int elementIndex = arrayList.indexOf(imageData2);
                 imageData2.setName("Image: " + elementIndex);
+                imageListAdapter.notifyDataSetChanged();
+
+                Intent intent = new Intent(getApplicationContext(), ImageDetailsActivity.class);
+                intent.putExtra("Image", imageData2);
+                startActivity(intent);
 //                linearLayout.addView(generateTextView(imageData2.getName(), elementIndex));
             }
         }
@@ -97,15 +97,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i("ActivityStateTracking", String.format("%s - onResume", getLocalClassName()));
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 1);
-            }
-        });
     }
 
     // User interacting with app
