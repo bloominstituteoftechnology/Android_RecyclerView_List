@@ -3,6 +3,7 @@ package com.lambda.android_recyclerview_list;
 import android.content.Intent;
 import android.app.Activity;
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,11 +27,10 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     Context context;
 
 
-    public ImageListAdapter(ArrayList<ImageData> journalEntries) {
+    public ImageListAdapter(ArrayList<ImageData> alImageData) {
 
-        this.alImageData = journalEntries;
+        this.alImageData = alImageData;
 
-        getIntent();
 
     }
 
@@ -43,8 +43,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         context=viewGroup.getContext();
 
+
         View entryView = LayoutInflater.from(context).inflate(R.layout.image_list_view, viewGroup, false);
-        alImageData=(ArrayList<ImageData>)getIntent(  ).getSerializableExtra("DATA_I_NEED");
+
 
         return new ViewHolder(entryView);
 
@@ -71,7 +72,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
 
             public void onClick(View v) {
 
-                Intent detailIntent = new Intent(v.getContext(),   ImageListAdapter.class);
+                Intent detailIntent = new Intent(v.getContext(),   ImageListView.class);
 
                 detailIntent.putExtra("ImageData", id                );
 
@@ -110,7 +111,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
 
             super(itemView);
 
-            this.parent = itemView.findViewById(R.id.parent);
+            this.parent = itemView.findViewById(R.id.element_parent);
 
             this.tvURL = itemView.findViewById(R.id.text_url);
 
