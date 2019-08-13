@@ -1,7 +1,8 @@
-package com.example.recyclerviewlist2
+package com.example.recyclerviewlist2.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.recyclerviewlist2.R
 
 class MainActivity : AppCompatActivity() {
 

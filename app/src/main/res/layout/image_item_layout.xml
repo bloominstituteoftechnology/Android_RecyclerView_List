@@ -17,23 +17,24 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.173" android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/Picture_view" android:layout_marginStart="8dp"/>
+            app:layout_constraintStart_toEndOf="@+id/Picture_image" android:layout_marginStart="8dp"/>
     <ImageView
+
 
             android:layout_width="214dp"
             android:layout_height="125dp"
             tools:srcCompat="@drawable/abstract_abstract_expressionism_art_2505693"
             tools:layout_editor_absoluteY="13dp"
             tools:layout_editor_absoluteX="-38dp"
-            android:id="@+id/Picture_view"/>
+            android:id="@+id/Picture_image"/>
     <TextView
             android:text="Picture description:      sample text sample text"
             android:layout_width="223dp"
             android:layout_height="77dp"
             tools:layout_editor_absoluteY="52dp"
-            android:id="@+id/textView"
+            android:id="@+id/Picture_Description"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/Picture_view"
+            app:layout_constraintStart_toEndOf="@+id/Picture_image"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
