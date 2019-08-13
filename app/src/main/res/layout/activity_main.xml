@@ -4,16 +4,36 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".MainActivity">
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:id="@+id/Picture_Name"
+            android:layout_width="103dp"
+            android:layout_height="42dp"
+            android:text="Picture Name!"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.173" android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/Picture_view" android:layout_marginStart="8dp"/>
+    <ImageView
+
+            android:layout_width="214dp"
+            android:layout_height="125dp"
+            tools:srcCompat="@drawable/abstract_abstract_expressionism_art_2505693"
+            tools:layout_editor_absoluteY="13dp"
+            tools:layout_editor_absoluteX="-38dp"
+            android:id="@+id/Picture_view"/>
+    <TextView
+            android:text="Picture description:      sample text sample text"
+            android:layout_width="223dp"
+            android:layout_height="77dp"
+            tools:layout_editor_absoluteY="52dp"
+            android:id="@+id/textView"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/Picture_view"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
