@@ -24,13 +24,15 @@ class ImageListAdapter (val Image_data: MutableList<Imagedata>):
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            ImageListAdapter.ViewHolder {
+            ViewHolder {
         val viewGroup = LayoutInflater.from(parent.context).inflate(R.layout.image_item_layout,parent, false)
         return ViewHolder(viewGroup)
     }
 
-    override fun onBindViewHolder(holder: ImageListAdapter.ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+       holder.description.text = Image_data[position].description
+        holder.image.setImageDrawable(Image_data[position].image)
+        holder.name.text = Image_data[position].name
     }
 
     override fun getItemCount(): Int {
