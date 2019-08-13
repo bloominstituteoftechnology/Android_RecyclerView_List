@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getMainExecutor
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.image_item_layout.view.*
@@ -33,7 +34,11 @@ class ImageListAdapter (val data: ArrayList<ImageData>) :
         holder.image.setImageURI(data[position].fileUri)
         holder.imageName.text=  data[position].fileName
         holder.imageUri.text= data[position].fileUriString
-        //holder.itemView.Set
+        holder.itemView.setOnClickListener {
+            val intent = Intent( it.context, DetailsActivity::class.java)
+            intent.putExtra("Key",data[position])
+            it.context.startActivity(intent)
+        }
 
 
 
