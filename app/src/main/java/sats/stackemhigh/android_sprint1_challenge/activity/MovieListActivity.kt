@@ -2,12 +2,13 @@ package sats.stackemhigh.android_sprint1_challenge.activity
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_movie_list.*
 import sats.stackemhigh.android_sprint1_challenge.R
+import sats.stackemhigh.android_sprint1_challenge.adapter.MovieListAdapter
 import sats.stackemhigh.android_sprint1_challenge.model.Movie
 
 class MovieListActivity : AppCompatActivity() {
@@ -34,69 +35,12 @@ class MovieListActivity : AppCompatActivity() {
             println(addMovieIntent)
             startActivityForResult(addMovieIntent, EDIT_MOVIE_REQUEST_CODE)
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-
-        when {
-            addMovieCheck -> addToListView(workingIndexValue)
-            editMovieCheck -> editListView(workingIndexValue)
-            deleteMovieCheck -> refreshListView()
-        }
-    }
-
-    private fun createTextView(movie: Movie, index: Int): TextView {
-
-        // Set the index of the movie class = to movieList index
-        movie.index = index
-        val newMovieView = TextView(this)
-        newMovieView.text = movie.title
-        newMovieView.textSize = 26f
-        newMovieView.id = movie.index
-
-        newMovieView.setOnClickListener {
-            val intent = Intent(this, MovieDetailsActivity::class.java)
-            intent.putExtra(MOVIE_DETAILS_REQUEST_KEY_MODIFY, movieList[index])
-            println(intent)
-            startActivityForResult(intent, EDIT_MOVIE_REQUEST_CODE)
-        }
-
-        return newMovieView
-    }
-
-    private fun verifyWatched(movie: Movie) {
-        val view = findViewById<TextView>(movie.index)
-
-        if (movie.watched) {
-            view.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
-        } else {
-            view.setPaintFlags(0)
-        }
-    }
-
-    private fun addToListView(index: Int) {
-        addMovieCheck = false
-        val view = createTextView(movieList[index], index)
-        sv_ll.addView(view)
-        verifyWatched(movieList[index])
-    }
-
-    private fun editListView(index: Int) {
-        editMovieCheck = false
-        val newMovieInfo = movieList[index]
-        val existingView = findViewById<TextView>(index)
-        existingView.text = newMovieInfo.title
-        verifyWatched(newMovieInfo)
-    }
-
-    private fun refreshListView() {
-        deleteMovieCheck = false
-        sv_ll.removeAllViews()
-        for (i in 0 until movieList.size) {
-            sv_ll.addView(createTextView(movieList[i], i))
-            verifyWatched(movieList[i])
-        }
+        list_view.setHasFixedSize(true)
+        val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        val adapter = MovieListAdapter(movieList)
+        list_view.layoutManager = manager
+        list_view.adapter = adapter
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -8,6 +8,16 @@
         android:orientation="vertical"
         tools:context=".activity.MovieListActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_weight="1"
+            android:id="@+id/list_view"
+            tools:listitem="@layout/movie_item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+<!--
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -25,6 +35,7 @@
         </LinearLayout>
 
     </ScrollView>
+-->
 
     <Button
             android:id="@+id/btn_add_movie"
