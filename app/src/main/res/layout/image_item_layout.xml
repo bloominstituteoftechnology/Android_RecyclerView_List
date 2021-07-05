@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/image_list_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+
+    <TextView
+        android:id="@+id/image_name_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Image Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/image_uri_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Image Uri"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        />
+
+</LinearLayout>
