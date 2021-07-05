@@ -1,3 +1,4 @@
+Spencer Stock
 # Android_RecyclerView_List
 
 ## Introduction
