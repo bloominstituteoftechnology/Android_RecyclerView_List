@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Image Viewer</string>
+    <string name="title_activity_image_details">ImageDetails</string>
+
+    <string name="title_activity_full_screen_image">FullScreenImage</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/add_image_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Add Image"
+        android:background="#ababab"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/image_recycler_view"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/image_item_layout"
+        android:layout_height="wrap_content"/>
+
+
+</android.support.constraint.ConstraintLayout>
