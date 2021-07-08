@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:orientation="vertical"
+        tools:context=".activity.MovieListActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_weight="1"
+            android:id="@+id/list_view"
+            tools:listitem="@layout/movie_item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+<!--
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="7dp"
+            android:scrollbarStyle="outsideOverlay">
+
+        <LinearLayout
+                android:id="@+id/sv_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+        </LinearLayout>
+
+    </ScrollView>
+-->
+
+    <Button
+            android:id="@+id/btn_add_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Add Movie" />
+
+</LinearLayout>
